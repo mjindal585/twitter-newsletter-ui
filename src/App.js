@@ -5,12 +5,7 @@ const App = () => {
   const [email, setEmail] = useState('');
   const [category, setCategory] = useState('');
 
-  // useEffect(() => {
-  //   require('dotenv').config()
-  // }, []);
-  const apiUrl = process.env.REACT_APP_API_BASE_URL;
-  const apiUrlPort = process.env.REACT_APP_API_BASE_URL_PORT;
-  const baseUrl = apiUrl + apiUrlPort;
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
   const handleSubscribe = async () => {
     try {
       await axios.post(`${baseUrl}/subscribe`, { email, category });
@@ -57,7 +52,7 @@ const App = () => {
         <option value="environment">Environment</option>
         <option value="accidents">Accidents</option>
       </select>
-      <button onClick={handleSubscribe}>Subscribe</button>
+      <button onClick={handleSubscribe}>Subscribe</button><br/>
       <button onClick={handleUnsubscribe}>Unsubscribe</button>
     </div>
   );
