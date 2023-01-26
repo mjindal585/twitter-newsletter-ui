@@ -1,18 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const App = () => {
   const [email, setEmail] = useState('');
   const [category, setCategory] = useState('');
 
-  useEffect(() => {
-    require('dotenv').config()
-  }, []);
-  const apiUrl = process.env.API_BASE_URL;
-
+  const baseUrl = process.env.REACT_APP_API_BASE_URL;
   const handleSubscribe = async () => {
     try {
-      await axios.post(`${apiUrl}/subscribe`, { email, category });
+      await axios.post(`${baseUrl}/subscribe`, { email, category });
       alert('Subscribed');
     } catch (err) {
       alert(err.response.data.error);
@@ -21,7 +17,7 @@ const App = () => {
 
   const handleUnsubscribe = async () => {
     try {
-      await axios.delete(`${apiUrl}/unsubscribe`, { data: { email, category } });
+      await axios.delete(`${baseUrl}/unsubscribe`, { data: { email, category } });
       alert('Unsubscribed');
     } catch (err) {
       alert(err.response.data.error);
@@ -56,7 +52,7 @@ const App = () => {
         <option value="environment">Environment</option>
         <option value="accidents">Accidents</option>
       </select>
-      <button onClick={handleSubscribe}>Subscribe</button>
+      <button onClick={handleSubscribe}>Subscribe</button><br/>
       <button onClick={handleUnsubscribe}>Unsubscribe</button>
     </div>
   );
